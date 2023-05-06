@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="ListBoxDemo.Controls.DatabaseTypeNewControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:ListBoxDemo.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="360">
+    <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <Border Margin="5">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                        <Image x:Name="dbImg" Width="40" Height="48" Margin="15,0,0,0"></Image>
+                        <TextBlock x:Name="dbNameTxt" Margin="15,0,0,0" VerticalAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </Border>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+
+        <ListBox.ItemsPanel>
+            <ItemsPanelTemplate>
+                <WrapPanel/>
+            </ItemsPanelTemplate>
+        </ListBox.ItemsPanel>
+
+        <ListBoxItem Width="100" Height="100" Margin="5" Content="1"/>
+        <ListBoxItem Width="100" Height="100" Margin="5" Content="2"/>
+        <ListBoxItem Width="100" Height="100" Margin="5" Content="3"/>
+        <ListBoxItem Width="100" Height="100" Margin="5" Content="4"/>
+        <ListBoxItem Width="100" Height="100" Margin="5" Content="5"/>
+        <ListBoxItem Width="100" Height="100" Margin="5" Content="6"/>
+        <ListBoxItem Width="100" Height="100" Margin="5" Content="7"/>
+        <ListBoxItem Width="100" Height="100" Margin="5" Content="8"/>
+
+    </ListBox>
+</UserControl>
