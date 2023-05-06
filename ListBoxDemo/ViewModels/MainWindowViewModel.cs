@@ -8,7 +8,7 @@ using ListBoxDemo.Models;
 
 namespace ListBoxDemo.ViewModels
 {
-    public class MainWindowViewModel
+    public class MainWindowViewModel : BaseViewModel
     {
         public ObservableCollection<DatabaseModel> DatabaseCollection { get; set; }
         public ObservableCollection<ModelTypeModel> ModelTypeCollection { get; set; }

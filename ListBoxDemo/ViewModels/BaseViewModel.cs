@@ -11,6 +11,12 @@ namespace ListBoxDemo.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-
+        public void RaisePropertyChanged(string propertyName)
+        {
+            if(this.PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
 }
