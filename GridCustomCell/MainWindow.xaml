@@ -1,0 +1,34 @@
+﻿<Window x:Class="GridCustomCell.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GridCustomCell"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Margin="12">
+        <Grid.Resources>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="1" x:Name="grid" ItemsSource="{Binding Items}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding ReferenceColumnName}"/>
+                <DataGridTextColumn Header="Value" Binding="{Binding ReferenceValue}"/>
+                <DataGridTemplateColumn Header="Value">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DockPanel HorizontalAlignment="Stretch">
+                                <CheckBox Background="Red" HorizontalContentAlignment="Right" Width="30" DockPanel.Dock="Right"/>
+                                <ComboBox Background="AliceBlue" Width="Auto"/>
+                            </DockPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
