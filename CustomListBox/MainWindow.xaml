@@ -1,0 +1,171 @@
+﻿<Window x:Class="CustomListBox.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+              xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:customControls="clr-namespace:CustomListBox.CustomControls"
+        xmlns:local="clr-namespace:CustomListBox"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="300">
+    <Window.Resources>
+        <Style x:Key="CustomListBoxStyle" TargetType="ListBox">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBox">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                                <ItemsPresenter/>
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CustomButtonStyle" TargetType="dx:SimpleButton">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style x:Key="CustomTextBoxStyle" TargetType="TextBox">
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="LightBlue" Offset="0.1" />
+                        <GradientStop Color="#D1D169" Offset="0.5" />
+                        <GradientStop Color="#6666FF" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="AcceptsReturn" Value="True"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Hidden"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Grid>
+                            <Border CornerRadius="4" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <!-- Top Row for Text -->
+                                        <RowDefinition Height="30" />
+                                        <!-- Bottom Row for Button -->
+                                    </Grid.RowDefinitions>
+
+                                    <dx:SimpleButton Style="{DynamicResource CustomButtonStyle}" GlyphWidth="16" GlyphHeight="16"
+                                                     HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top"
+                                                     Glyph="{Binding Source={dx:SvgImageSource Uri=/Imgs/icon_magic.svg}}"
+                                                     Command="{Binding CommitCommand}"/>
+                                    <ScrollViewer x:Name="PART_ContentHost" Grid.Row="0"/>
+
+                                    <dx:SimpleButton Grid.Row="1"
+                                                     Style="{DynamicResource CustomButtonStyle}"
+                                                     ToolTip="发送" GlyphWidth="16" GlyphHeight="16"
+                                                     HorizontalAlignment="Right" GlyphAlignment="Right" 
+                                                     Content="{Binding DataContext.ButtonContent,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TextBox}}}"
+                                                     Glyph="{Binding Source={dx:SvgImageSource Uri=/Imgs/icon_send.svg}}"
+                                                     Command="{Binding CommitCommand}"
+                                                     CommandParameter="{x:Reference Name=list}"
+                                                     IsEnabled="{Binding DataContext.IsIdle,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TextBox}}}"/>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <BeginStoryboard x:Key="progressStoryBoard">
+            <Storyboard>
+                <DoubleAnimation BeginTime="0:0:5" Duration="0:0:5" From="0" To="360" RepeatBehavior="Forever" Storyboard.TargetProperty="EndAngle"/>
+            </Storyboard>
+        </BeginStoryboard>
+        
+        <Style x:Key="CustomListBoxItemStyle" TargetType="ListBoxItem">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="border" Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="4">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="60"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding CreateTime}" Margin="5" Foreground="#86909C" FontSize="12"/>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                        <Grid Grid.Column="1"  Margin="0,0,350,0">
+                                            <customControls:Arc x:Name="arc" Width="30" Height="30" Rect="3,3,24,24" StartAngle="0" EndAngle="200" Stroke="SkyBlue" StrokeThickness="6"
+                                                                StrokeDashArray="0.3,0.2" HorizontalAlignment="Center" VerticalAlignment="Center" IsBeginStory="{Binding InProcessing}">
+                                                <!--<customControls:Arc.Triggers>
+                                                    <EventTrigger RoutedEvent="Loaded">
+                                                       
+                                                    </EventTrigger>
+                                                </customControls:Arc.Triggers>-->
+                                            </customControls:Arc>
+                                            <!--<TextBlock MaxWidth="30" Text="..." FontSize="25" FontFamily="#DigifaceWide" Foreground="SkyBlue" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
+
+                                            <!--<TextBlock MaxWidth="30" Text="{Binding ElementName=arc,Path=EndAngle}" FontSize="25" FontFamily="#DigifaceWide" Foreground="SkyBlue" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
+                                        </Grid>
+                                        <dx:SimpleButton x:Name="imgBtn" Grid.Column="1" Command="{Binding DataContext.ReGenerateCommitCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" 
+                                                     CommandParameter="{Binding}" Glyph="./Imgs/refresh32.png" GlyphWidth="24" GlyphHeight="24"
+                                                     Visibility="Collapsed" Style="{StaticResource CustomButtonStyle}"/>
+                                    </StackPanel>
+                                    
+                                   
+                                </Grid>
+                                <TextBlock Text="{Binding Content}" Foreground="#333333" TextWrapping="Wrap" Margin="5"/>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#C9DBF6" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="imgBtn" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="border" Property="Background" Value="#FFFF99"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+    <dxlc:LayoutControl>
+        <dxlc:LayoutGroup Orientation="Vertical">
+            <dxlc:LayoutGroup Orientation="Vertical">
+                <Image Source="./Imgs/banner@2x.png" Stretch="Fill" Height="60"/>
+                <ListBox x:Name="list" Style="{StaticResource CustomListBoxStyle}" ItemsSource="{Binding HistoryCollection}"
+                         ItemContainerStyle="{StaticResource CustomListBoxItemStyle}"
+                         SelectedItem="{Binding CurrentSelectedItem}">
+                </ListBox>
+            </dxlc:LayoutGroup>
+            <dxlc:LayoutGroup>
+                <TextBox Height="80" Margin="0,5,0,5" FontSize="14" x:Name="promptInfoTxt" TextWrapping="Wrap" VerticalAlignment="Center"
+                         Text="{Binding PromtInfo}" Style="{DynamicResource CustomTextBoxStyle}" SelectionStart="20">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding TextChangedCommand}"
+                                                   CommandParameter="{Binding Path=Text, RelativeSource={RelativeSource Mode=FindAncestor, 
+                                AncestorLevel=1,AncestorType={x:Type TextBox}}}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+                <customControls:CircleProgress x:Name="circleProgressBar" CurrentValue1="0.9" Visibility="Collapsed"/>
+                <dx:SimpleButton x:Name="btnStart" Content="开始" Click="Button_Click" Visibility="Collapsed"/>
+                <dx:SimpleButton x:Name="testProgressBar" Content="Test" Click="testProgressBar_Click" Width="30" Height="25"/>
+                <dx:SimpleButton x:Name="testArc" Content="Test" Click="testArc_Click"  Width="30" Height="25"/>
+            </dxlc:LayoutGroup>
+        </dxlc:LayoutGroup>
+    </dxlc:LayoutControl>
+</Window>
