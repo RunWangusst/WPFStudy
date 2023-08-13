@@ -79,18 +79,18 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <BeginStoryboard x:Key="progressStoryBoard">
             <Storyboard>
                 <DoubleAnimation BeginTime="0:0:5" Duration="0:0:5" From="0" To="360" RepeatBehavior="Forever" Storyboard.TargetProperty="EndAngle"/>
             </Storyboard>
         </BeginStoryboard>
-        
+
         <Style x:Key="CustomListBoxItemStyle" TargetType="ListBoxItem">
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="ListBoxItem">
+                    <ControlTemplate TargetType="ListBoxItem" x:Name="listItem">
                         <Border x:Name="border" Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
@@ -99,29 +99,15 @@
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
-                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="30"/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="{Binding CreateTime}" Margin="5" Foreground="#86909C" FontSize="12"/>
-                                    <StackPanel Grid.Column="1" Orientation="Horizontal">
-                                        <Grid Grid.Column="1"  Margin="0,0,350,0">
-                                            <customControls:Arc x:Name="arc" Width="30" Height="30" Rect="3,3,24,24" StartAngle="0" EndAngle="200" Stroke="SkyBlue" StrokeThickness="6"
-                                                                StrokeDashArray="0.3,0.2" HorizontalAlignment="Center" VerticalAlignment="Center" IsBeginStory="{Binding InProcessing}">
-                                                <!--<customControls:Arc.Triggers>
-                                                    <EventTrigger RoutedEvent="Loaded">
-                                                       
-                                                    </EventTrigger>
-                                                </customControls:Arc.Triggers>-->
-                                            </customControls:Arc>
-                                            <!--<TextBlock MaxWidth="30" Text="..." FontSize="25" FontFamily="#DigifaceWide" Foreground="SkyBlue" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
-
-                                            <!--<TextBlock MaxWidth="30" Text="{Binding ElementName=arc,Path=EndAngle}" FontSize="25" FontFamily="#DigifaceWide" Foreground="SkyBlue" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
-                                        </Grid>
-                                        <dx:SimpleButton x:Name="imgBtn" Grid.Column="1" Command="{Binding DataContext.ReGenerateCommitCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" 
+                                    <customControls:Arc Grid.Column="1" x:Name="arc" Width="24" Height="24" Rect="3,3,18,18" StartAngle="0" EndAngle="200" Stroke="SkyBlue" StrokeThickness="4"
+                                                        StrokeDashArray="0.3,0.2" HorizontalAlignment="Center" VerticalAlignment="Center" IsBeginStory="{Binding InProcessing}"
+                                                        ToolTip="请稍等..."/>
+                                    <dx:SimpleButton x:Name="imgBtn" Grid.Column="1" Command="{Binding DataContext.ReGenerateCommitCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" 
                                                      CommandParameter="{Binding}" Glyph="./Imgs/refresh32.png" GlyphWidth="24" GlyphHeight="24"
-                                                     Visibility="Collapsed" Style="{StaticResource CustomButtonStyle}"/>
-                                    </StackPanel>
-                                    
-                                   
+                                                     Style="{StaticResource CustomButtonStyle}" Visibility="Collapsed"/>
                                 </Grid>
                                 <TextBlock Text="{Binding Content}" Foreground="#333333" TextWrapping="Wrap" Margin="5"/>
                             </StackPanel>
@@ -131,9 +117,13 @@
                                 <Setter TargetName="border" Property="Background" Value="#C9DBF6" />
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="imgBtn" Property="Visibility" Value="Visible"/>
                                 <Setter TargetName="border" Property="Background" Value="#FFFF99"/>
+                                <Setter TargetName="imgBtn" Property="Visibility" Value="Visible"/>
                             </Trigger>
+                            <DataTrigger Binding="{Binding DataContext.IsIdle,RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" Value="false">
+                                <Setter Property="GlyphWidth" Value="0" TargetName="imgBtn"/>
+                                <Setter Property="GlyphHeight" Value="0" TargetName="imgBtn"/>
+                            </DataTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
