@@ -77,6 +77,22 @@ namespace CustomListBox.ViewModels
             }
         }
 
+        private bool isShowMarkText = true;
+
+        public bool IsShowMarkText
+        {
+            get { return isShowMarkText; }
+            set
+            {
+                if (isShowMarkText != value)
+                {
+                    isShowMarkText = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsShowMarkText"));
+                }
+
+            }
+        }
+
 
         [Obsolete]
         public DelegateCommand<object> CommitCommand { get; set; }
@@ -97,6 +113,7 @@ namespace CustomListBox.ViewModels
             TextChangedCommand = new DelegateCommand<object>(TextChanged);
             ButtonContent = "0/2000 ";
             PromtInfo = StartValue;
+            IsShowMarkText = PromtInfo == StartValue;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -155,8 +172,9 @@ namespace CustomListBox.ViewModels
                 // 仅调用接口，不重新添加数据
                 // focused change
                 ButtonContent = $"{obj?.ToString().Length}/2000 ";
-            }
 
+                IsShowMarkText = obj?.ToString() == StartValue;
+            }
         }
     }
 }

@@ -31,13 +31,16 @@
             <Setter Property="Background" Value="Transparent"/>
         </Style>
         <Style x:Key="CustomTextBoxStyle" TargetType="TextBox">
-            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="BorderBrush">
                 <Setter.Value>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Color="LightBlue" Offset="0.1" />
-                        <GradientStop Color="#D1D169" Offset="0.5" />
-                        <GradientStop Color="#6666FF" Offset="1.0" />
+                        <GradientStop Color="#FCE3A2" Offset="0.14" />
+                        <GradientStop Color="#87F7EC" Offset="0.37" />
+                        <GradientStop Color="#FCE3A2" Offset="0.49" />
+                        <GradientStop Color="#87F7EC" Offset="0.64" />
+                        <GradientStop Color="#BFEAFF" Offset="0.76" />
+                        <GradientStop Color="#5FA6FA" Offset="1" />
                     </LinearGradientBrush>
                 </Setter.Value>
             </Setter>
@@ -49,6 +52,9 @@
                     <ControlTemplate TargetType="TextBox">
                         <Grid>
                             <Border CornerRadius="4" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                                <Border.Effect>
+                                    <DropShadowEffect Direction="320" BlurRadius="6" ShadowDepth="4" Color="#1D2129" Opacity="0.2"/>
+                                </Border.Effect>
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*" />
@@ -56,11 +62,15 @@
                                         <RowDefinition Height="30" />
                                         <!-- Bottom Row for Button -->
                                     </Grid.RowDefinitions>
-
-                                    <dx:SimpleButton Style="{DynamicResource CustomButtonStyle}" GlyphWidth="16" GlyphHeight="16"
+                                    <StackPanel Orientation="Horizontal">
+                                        <dx:SimpleButton Style="{DynamicResource CustomButtonStyle}" GlyphWidth="16" GlyphHeight="16"
                                                      HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top"
                                                      Glyph="{Binding Source={dx:SvgImageSource Uri=/Imgs/icon_magic.svg}}"
                                                      Command="{Binding CommitCommand}"/>
+                                        <TextBlock x:Name="markText" Text="向AI助手提问？" Foreground="#C2C2C2" Margin="5,5,0,0"
+                                                   Visibility="Collapsed"/>
+                                    </StackPanel>
+                                    
                                     <ScrollViewer x:Name="PART_ContentHost" Grid.Row="0"/>
 
                                     <dx:SimpleButton Grid.Row="1"
@@ -75,6 +85,11 @@
                                 </Grid>
                             </Border>
                         </Grid>
+                        <ControlTemplate.Triggers>
+                            <DataTrigger Binding="{Binding DataContext.IsShowMarkText,RelativeSource={RelativeSource Mode=Self}}" Value="true">
+                                <Setter Property="Visibility" Value="Visible" TargetName="markText"/>
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -87,7 +102,8 @@
         </BeginStoryboard>
 
         <Style x:Key="CustomListBoxItemStyle" TargetType="ListBoxItem">
-            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Margin" Value="5,5,5,0"/>
+            <Setter Property="Background" Value="#F7F8FA"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem" x:Name="listItem">
@@ -114,10 +130,10 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="border" Property="Background" Value="#C9DBF6" />
+                                <Setter TargetName="border" Property="Background" Value="#D9EBFF"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="Background" Value="#FFFF99"/>
+                                <Setter TargetName="border" Property="Background" Value="#D9EBFF"/>
                                 <Setter TargetName="imgBtn" Property="Visibility" Value="Visible"/>
                             </Trigger>
                             <DataTrigger Binding="{Binding DataContext.IsIdle,RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" Value="false">
