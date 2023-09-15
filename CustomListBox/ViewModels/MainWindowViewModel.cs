@@ -1,14 +1,12 @@
 ﻿using CustomListBox.Models;
 using DevExpress.Xpf.Core.Commands;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace CustomListBox.ViewModels
 {
@@ -101,6 +99,8 @@ namespace CustomListBox.ViewModels
         public DelegateCommand<object> ReGenerateCommitCommand { get; set; }
         [Obsolete]
         public DelegateCommand<object> TextChangedCommand { get; set; }
+        [Obsolete]
+        public ICommand KeyDownCommand { get; set; }
 
         private const string StartValue = "     ";
 
@@ -111,9 +111,18 @@ namespace CustomListBox.ViewModels
             CommitCommand = new DelegateCommand<object>(Commit);
             ReGenerateCommitCommand = new DelegateCommand<object>(ReGenerate);
             TextChangedCommand = new DelegateCommand<object>(TextChanged);
+            KeyDownCommand = new DelegateCommand<KeyEventArgs>(KeyDown);
             ButtonContent = "0/2000 ";
             PromtInfo = StartValue;
             IsShowMarkText = PromtInfo == StartValue;
+        }
+
+        private async void KeyDown(KeyEventArgs args)
+        {
+            if(args.Key == Key.Enter)
+            {
+                Commit(null);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -134,7 +143,7 @@ namespace CustomListBox.ViewModels
                 var listHistory = obj as ListBox;
 
                 ///将光标光标滑动指向到最后一项
-                listHistory.ScrollIntoView(item);
+                listHistory?.ScrollIntoView(item);
                 CurrentSelectedItem = item;
 
                 await TimeConsume(item);

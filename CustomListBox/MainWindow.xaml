@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
               xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
               xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:customControls="clr-namespace:CustomListBox.CustomControls"
         xmlns:local="clr-namespace:CustomListBox"
         mc:Ignorable="d"
@@ -158,12 +158,16 @@
             </dxlc:LayoutGroup>
             <dxlc:LayoutGroup>
                 <TextBox Height="80" Margin="0,5,0,5" FontSize="14" x:Name="promptInfoTxt" TextWrapping="Wrap" VerticalAlignment="Center"
-                         Text="{Binding PromtInfo}" Style="{DynamicResource CustomTextBoxStyle}" SelectionStart="20">
+                         Text="{Binding PromtInfo}" Style="{DynamicResource CustomTextBoxStyle}" SelectionStart="20" AcceptsReturn="False" >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="TextChanged">
                             <i:InvokeCommandAction Command="{Binding TextChangedCommand}"
                                                    CommandParameter="{Binding Path=Text, RelativeSource={RelativeSource Mode=FindAncestor, 
                                 AncestorLevel=1,AncestorType={x:Type TextBox}}}"/>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="PreviewKeyDown">
+                            <i:InvokeCommandAction Command="{Binding KeyDownCommand}" PassEventArgsToCommand="True"/>
+
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </TextBox>

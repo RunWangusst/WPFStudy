@@ -9,6 +9,43 @@
         mc:Ignorable="d"
         Title="TestArc" Height="450" Width="800">
     <Grid>
+        <Grid Margin="0,0,350,0" Background="#FCE3A2">
+            <customControls:Arc x:Name="arc" Width="115" Height="115" Rect="7.5,7.5,100,100" StartAngle="0" EndAngle="200" Stroke="SkyBlue" StrokeThickness="15" StrokeDashArray="0.2,0.1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <customControls:Arc.Triggers>
+                    <EventTrigger RoutedEvent="Loaded">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation BeginTime="0:0:10" Duration="0:0:10" From="0" To="360" RepeatBehavior="Forever" Storyboard.TargetProperty="EndAngle"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </customControls:Arc.Triggers>
+            </customControls:Arc>
+            <TextBlock MaxWidth="60" Text="{Binding ElementName=arc,Path=EndAngle}" FontSize="25" FontFamily="#DigifaceWide" Foreground="SkyBlue" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+        <Grid Margin="350,0,0,0" Background="#87F7EC">
+            <customControls:Arc x:Name="arc1" Width="115" Height="115" Rect="7.5,7.5,100,100" StartAngle="0" EndAngle="360" Stroke="#8555" StrokeThickness="15" 
+                                StrokeStartLineCap="Round" StrokeEndLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <customControls:Arc x:Name="arc2" Width="115" Height="115" Rect="7.5,7.5,100,100" StartAngle="0" EndAngle="1" StrokeThickness="15"
+                                StrokeStartLineCap="Round" StrokeEndLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <customControls:Arc.Stroke>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#FBFBFB" Offset="0"/>
+                        <GradientStop Color="DimGray" Offset="1"/>
+                    </LinearGradientBrush>
+                </customControls:Arc.Stroke>
+                <customControls:Arc.Triggers>
+                    <EventTrigger RoutedEvent="Loaded">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation BeginTime="0:0:10" Duration="0:0:2" From="0" To="720" RepeatBehavior="Forever" Storyboard.TargetProperty="StartAngle"/>
+                                <DoubleAnimation BeginTime="0:0:10" Duration="0:0:2" From="0" To="721" RepeatBehavior="Forever" Storyboard.TargetProperty="EndAngle"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </customControls:Arc.Triggers>
+            </customControls:Arc>
+        </Grid>
         <ed:Arc ArcThickness="5" StartAngle="0" Fill="Pink" Stretch="None" EndAngle="150" StrokeDashArray="5 10"></ed:Arc>
         <StackPanel>
             <DockPanel>
@@ -32,40 +69,5 @@
                 <Line Margin="0 5" X1="10" X2="495" StrokeThickness="10" Stroke="Gray" StrokeDashArray="2,2,0,2,0,2"/>
             </DockPanel>
         </StackPanel>
-        <Grid Margin="0,0,350,0">
-            <customControls:Arc x:Name="arc" Width="115" Height="115" Rect="7.5,7.5,100,100" StartAngle="0" EndAngle="200" Stroke="SkyBlue" StrokeThickness="15" StrokeDashArray="0.2,0.1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <customControls:Arc.Triggers>
-                    <EventTrigger RoutedEvent="Loaded">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation BeginTime="0:0:10" Duration="0:0:10" From="0" To="360" RepeatBehavior="Forever" Storyboard.TargetProperty="EndAngle"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </customControls:Arc.Triggers>
-            </customControls:Arc>
-            <TextBlock MaxWidth="60" Text="{Binding ElementName=arc,Path=EndAngle}" FontSize="25" FontFamily="#DigifaceWide" Foreground="SkyBlue" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </Grid>
-        <Grid Margin="350,0,0,0">
-            <customControls:Arc x:Name="arc1" Width="115" Height="115" Rect="7.5,7.5,100,100" StartAngle="0" EndAngle="360" Stroke="#8555" StrokeThickness="15" StrokeStartLineCap="Round" StrokeEndLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <customControls:Arc x:Name="arc2" Width="115" Height="115" Rect="7.5,7.5,100,100" StartAngle="0" EndAngle="1" StrokeThickness="15" StrokeStartLineCap="Round" StrokeEndLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <customControls:Arc.Stroke>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                        <GradientStop Color="LightGray" Offset="0"/>
-                        <GradientStop Color="DimGray" Offset="1"/>
-                    </LinearGradientBrush>
-                </customControls:Arc.Stroke>
-                <customControls:Arc.Triggers>
-                    <EventTrigger RoutedEvent="Loaded">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation BeginTime="0:0:10" Duration="0:0:2" From="0" To="720" AccelerationRatio="0.2" DecelerationRatio="0.8" RepeatBehavior="Forever" Storyboard.TargetProperty="StartAngle"/>
-                                <DoubleAnimation BeginTime="0:0:10" Duration="0:0:2" From="0" To="721" AccelerationRatio="0" DecelerationRatio="1" RepeatBehavior="Forever" Storyboard.TargetProperty="EndAngle"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </customControls:Arc.Triggers>
-            </customControls:Arc>
-        </Grid>
     </Grid>
 </Window>
