@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.33801.447
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.33913.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropDownMenu", "DropDownMenu\DropDownMenu.csproj", "{890B42BD-CF94-44C9-9E22-AACADF59624A}"
 EndProject
@@ -24,6 +24,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StringMatch", "StringMatch\StringMatch.csproj", "{C9594BD5-CB8E-42A2-A837-0ED0C3A9468B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomListBox", "CustomListBox\CustomListBox.csproj", "{42CE281B-2E6E-44ED-AC6B-4402902F906C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "grpc", "grpc", "{C6F753AD-3105-4345-9DB7-D8C815D8E425}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcClient", "grpc\GrpcClient\GrpcClient.csproj", "{5238D0CF-6FC0-4D19-BABE-DDA6D5970A7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcServer", "grpc\GrpcServer\GrpcServer.csproj", "{F308B340-8A10-43C7-9886-0879116A6D12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcService", "grpc\GrpcService\GrpcService.csproj", "{CA8B016C-2B2E-4AA5-8F77-47D7F906910F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,9 +83,26 @@ Global
 		{42CE281B-2E6E-44ED-AC6B-4402902F906C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42CE281B-2E6E-44ED-AC6B-4402902F906C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42CE281B-2E6E-44ED-AC6B-4402902F906C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5238D0CF-6FC0-4D19-BABE-DDA6D5970A7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5238D0CF-6FC0-4D19-BABE-DDA6D5970A7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5238D0CF-6FC0-4D19-BABE-DDA6D5970A7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5238D0CF-6FC0-4D19-BABE-DDA6D5970A7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F308B340-8A10-43C7-9886-0879116A6D12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F308B340-8A10-43C7-9886-0879116A6D12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F308B340-8A10-43C7-9886-0879116A6D12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F308B340-8A10-43C7-9886-0879116A6D12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA8B016C-2B2E-4AA5-8F77-47D7F906910F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA8B016C-2B2E-4AA5-8F77-47D7F906910F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA8B016C-2B2E-4AA5-8F77-47D7F906910F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA8B016C-2B2E-4AA5-8F77-47D7F906910F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5238D0CF-6FC0-4D19-BABE-DDA6D5970A7B} = {C6F753AD-3105-4345-9DB7-D8C815D8E425}
+		{F308B340-8A10-43C7-9886-0879116A6D12} = {C6F753AD-3105-4345-9DB7-D8C815D8E425}
+		{CA8B016C-2B2E-4AA5-8F77-47D7F906910F} = {C6F753AD-3105-4345-9DB7-D8C815D8E425}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {20E82941-A67D-4142-83AB-ADB1BF685819}
