@@ -1,0 +1,38 @@
+﻿<Window x:Class="WebSocketsClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WebSocketsClient"
+        mc:Ignorable="d"
+        Title="Socket Client" Height="450" Width="800">
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Client ID:" Margin="5"/>
+                    <TextBox Text="{Binding ClientID}" Margin="5"/>
+                    <Label Content="Peer ID:" Margin="5"/>
+                    <TextBox Text="{Binding PeerID}" Margin="5"/>
+                    <Label Content="Server Uri:" Margin="5"/>
+                    <TextBox Text="{Binding Uri}" Margin="5"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="连接服务器" Command="{Binding ConnectCommand}" CommandParameter="{Binding ElementName=outputTxt}" Margin="20,5,0,5" />
+                    <Button Content="断开服务器" Command="{Binding DisConnectServer}" CommandParameter="{Binding ElementName=outputTxt}" Margin="20,5,0,5" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel>
+                <TextBox DockPanel.Dock="Left" Text="{Binding InputMsg}" Height="100"/>
+                <Button Content="发送" Command="{Binding SendMessageCommand}" Width="100" Margin="10"/>
+            </StackPanel>
+        </StackPanel>
+
+        <RichTextBox Grid.Row="1" x:Name="outputTxt"/>
+    </Grid>
+</Window>
