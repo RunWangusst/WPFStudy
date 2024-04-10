@@ -41,7 +41,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocketsClient", "WebSock
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWebSocketLib", "MyWebSocketLib\MyWebSocketLib.csproj", "{B99AD272-D602-4BCA-A5E3-A17083A3580E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocketsServer", "WebSocketsServer\WebSocketsServer.csproj", "{71E051EE-F26D-4EB6-A147-81DF50F4860C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSocketsServer", "WebSocketsServer\WebSocketsServer.csproj", "{71E051EE-F26D-4EB6-A147-81DF50F4860C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoundPlayDemo", "SoundPlayDemo\SoundPlayDemo.csproj", "{26646A2E-03E0-4DA7-9B56-B3A37CFD01DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -117,6 +119,10 @@ Global
 		{71E051EE-F26D-4EB6-A147-81DF50F4860C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71E051EE-F26D-4EB6-A147-81DF50F4860C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71E051EE-F26D-4EB6-A147-81DF50F4860C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26646A2E-03E0-4DA7-9B56-B3A37CFD01DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26646A2E-03E0-4DA7-9B56-B3A37CFD01DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26646A2E-03E0-4DA7-9B56-B3A37CFD01DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26646A2E-03E0-4DA7-9B56-B3A37CFD01DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
